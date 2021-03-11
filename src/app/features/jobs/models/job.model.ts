@@ -4,5 +4,5 @@ export class Job {
   city: string;
   state: string;
   status: string;
-  dateLastUpdated: string;
+  dateLastUpdated: Date;
 }
