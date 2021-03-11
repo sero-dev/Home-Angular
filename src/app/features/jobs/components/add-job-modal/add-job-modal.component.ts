@@ -19,7 +19,7 @@ export class AddJobModalComponent implements OnInit {
     this.initForm();
   }
 
-  initForm() {
+  initForm(): void {
     this.jobForm = this.formBuilder.group( {
       title: ['', [Validators.required]],
       employer: ['', [Validators.required]],
@@ -31,22 +31,21 @@ export class AddJobModalComponent implements OnInit {
     });
   }
 
-  onSubmitForm() {
+  onSubmitForm(): void {
     const formValue = this.jobForm.value;
-    const newJob = new NewJob(
-    formValue['title'],
-    formValue['employer'],
-    formValue['city'],
-    formValue['state'],
-    formValue['status'],
-    new Date().toDateString(),
-    formValue['minSalary'],
-    formValue['maxSalary'],
-    );
+    const newJob = new NewJob();
+    newJob.jobTitle = formValue.title;
+    newJob.employer = formValue.employer;
+    newJob.city = formValue.city;
+    newJob.state = formValue.state;
+    newJob.status = formValue.status;
+    newJob.dateLastUpdated = new Date();
+    newJob.minSalary = formValue.minSalary;
+    newJob.maxSalary = formValue.maxSalary;
     this.jobService.postJobs(newJob);
   }
 
-  close() {
+  close(): void {
     this.activeModal.close();
   }
 
