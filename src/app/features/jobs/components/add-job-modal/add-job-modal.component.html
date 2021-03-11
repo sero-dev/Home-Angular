@@ -1,0 +1,40 @@
+<div class="modal-header">
+  <h4 class="modal-title">Please fill in the requested information</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="jobForm" (ngSubmit)="onSubmitForm()">
+    <div class="form-group">
+      <label for="title">Job Title</label>
+      <input type="text" class="form-control" id="title" formControlName="title">
+    </div>
+    <div class="form-group">
+      <label for="employer">Employer</label>
+      <input type="text" class="form-control" id="employer" formControlName="employer">
+    </div>
+    <div class="form-group">
+      <label for="city">City</label>
+      <input type="text" class="form-control" id="city" formControlName="city">
+    </div>
+    <div class="form-group">
+      <label for="state">State</label>
+      <input type="text" class="form-control" id="state" formControlName="state">
+    </div>
+    <div class="form-group">
+      <label for="status">Status</label>
+      <input type="text" class="form-control" id="status" formControlName="status">
+    </div>
+    <div class="form-group">
+      <label for="minSalary">Minimum Salary</label>
+      <input type="number" class="form-control" id="minSalary" formControlName="minSalary">
+    </div>
+    <div class="form-group">
+      <label for="maxSalary">Maximum Salary</label>
+      <input type="number" class="form-control" id="maxSalary" formControlName="maxSalary">
+    </div>
+
+    <div class="modal-footer">
+  <button type="submit" class="btn btn-outline-dark" (click)="close()" [disabled]="jobForm.invalid">Validate</button>
+</div>

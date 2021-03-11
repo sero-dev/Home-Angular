@@ -121,5 +121,8 @@
       }
     }
   },
-  "defaultProject": "Home-Angular"
+  "defaultProject": "Home-Angular",
+  "cli": {
+    "analytics": false
+  }
 }
