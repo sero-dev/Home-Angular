@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddJobModalComponent } from '../add-job-modal/add-job-modal.component';
 
 @Component({
@@ -11,8 +11,8 @@ export class AddJobComponent implements OnInit {
 
   constructor(private modalService: NgbModal) {}
 
-  open() {
-    const modalRef = this.modalService.open(AddJobModalComponent);
+  open(): void {
+    this.modalService.open(AddJobModalComponent);
   }
 
   ngOnInit(): void {
