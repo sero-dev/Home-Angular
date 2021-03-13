@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  jobhunt-db:
+    image: mongo
+    container_name: jobhunt-db
+
+  jobhunt-api:
+    image: serodev/jobhunt
+    container_name: jobhunt-api
+    ports:
+    - "5000:80"
+    environment:
+    - ConnectionStrings:Mongo=mongodb://jobhunt-db:27017

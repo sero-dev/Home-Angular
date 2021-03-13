@@ -1,6 +1,6 @@
-import { Component, OnInit} from '@angular/core';
-import { FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NewJob } from '../../models/newJob.model';
 import { JobsService } from '../../services/jobs.service';
 
@@ -33,6 +33,7 @@ export class AddJobModalComponent implements OnInit {
 
   onSubmitForm(): void {
     const formValue = this.jobForm.value;
+
     const newJob = new NewJob();
     newJob.jobTitle = formValue.title;
     newJob.employer = formValue.employer;
@@ -42,11 +43,14 @@ export class AddJobModalComponent implements OnInit {
     newJob.dateLastUpdated = new Date();
     newJob.minSalary = formValue.minSalary;
     newJob.maxSalary = formValue.maxSalary;
-    this.jobService.postJobs(newJob);
+
+    this.jobService.createNewJob(newJob).subscribe(
+      data => console.log(data),
+      error => console.log(error)
+    );
   }
 
   close(): void {
     this.activeModal.close();
   }
-
 }

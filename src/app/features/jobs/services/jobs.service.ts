@@ -1,20 +1,25 @@
-import {Injectable} from '@angular/core';
-import {Job} from '../models/job.model';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
-import {ListResponse} from '../../../core/models/list-response.model';
-import {NewJob} from '../models/newJob.model';
+import { Injectable } from '@angular/core';
+import { Job } from '../models/job.model';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { ListResponse } from '../../../core/models/list-response.model';
+import { NewJob } from '../models/newJob.model';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JobsService {
 
-  constructor(private http: HttpClient) { }
+  private readonly baseUrl: string;
+  constructor(private http: HttpClient) {
+    this.baseUrl = environment.jobHunt.baseUrl;
+  }
 
   getJobs(): Observable<Job[]> {
-    return this.http.get<ListResponse<any>>('https://localhost:5001/api/Jobs').pipe(
+    const endpoint = `${this.baseUrl}/api/Jobs`;
+    return this.http.get<ListResponse<any>>(endpoint).pipe(
       map(value => {
         return value.data.map<Job>(response => {
           const job = new Job();
@@ -30,8 +35,9 @@ export class JobsService {
     );
   }
 
-  postJobs(newJob: NewJob): void {
-    this.http.post('https://localhost:5001/api/Jobs', {
+  createNewJob(newJob: NewJob): Observable<any> {
+    const endpoint = `${this.baseUrl}/api/Jobs`;
+    return this.http.post(endpoint, {
       jobTitle: newJob.jobTitle,
       employer: newJob.employer,
       city: newJob.city,
@@ -40,15 +46,6 @@ export class JobsService {
       dateLastUpdated: newJob.dateLastUpdated,
       minSalary: newJob.minSalary,
       maxSalary: newJob.maxSalary
-    }).subscribe(
-        () => {
-          console.log('Recording completed !');
-          return 200;
-        },
-        (error) => {
-          console.log('Error ! : ' + error);
-          return 401;
-        }
-      );
+    }, {responseType: 'text'});
   }
 }
