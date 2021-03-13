@@ -35,7 +35,7 @@ export class JobsService {
     );
   }
 
-  postJobs(newJob: NewJob): Observable<any> {
+  createNewJob(newJob: NewJob): Observable<any> {
     const endpoint = `${this.baseUrl}/api/Jobs`;
     return this.http.post(endpoint, {
       jobTitle: newJob.jobTitle,

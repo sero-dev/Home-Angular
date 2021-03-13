@@ -44,7 +44,7 @@ export class AddJobModalComponent implements OnInit {
     newJob.minSalary = formValue.minSalary;
     newJob.maxSalary = formValue.maxSalary;
 
-    this.jobService.postJobs(newJob).subscribe(
+    this.jobService.createNewJob(newJob).subscribe(
       data => console.log(data),
       error => console.log(error)
     );
